@@ -19,6 +19,9 @@ app.get("/stream", (req, res) => {
   });
   res.flushHeaders();
 
+  // Send initial empty data on connect
+  res.write(`data: ${JSON.stringify({})}\n\n`);
+
   clients.push(res);
 
   req.on("close", () => {
